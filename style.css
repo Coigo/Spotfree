@@ -1,0 +1,45 @@
+body{
+    font-family: 'Gotham';
+    justify-content: flex-start;
+    display: flex;
+    margin: 0px;
+    width: 100%;
+  color: white;
+    
+}
+.sideBar {
+
+    background-color: rgb(0, 0, 0);
+    flex-direction: column;
+    height: 94.2vh;
+    width: 20%;
+    padding: 20px;
+    
+    
+}
+.sideBar h1{
+    
+    margin-bottom: 100px; 
+    margin-left: 30px;
+    
+}
+.sideBar button {
+    background-color: black;
+    font-family: 'Gotham';
+    font-size: 25px;
+    margin: 15px;
+    border: none;
+    outline: none;
+    color: white;
+
+}
+
+.Main {
+    background-color: #121212;
+        height: 100vh;
+        width: 80%;
+    }
+.Main h1{
+    padding-left: 50px;
+    font-size: 50px;
+}
