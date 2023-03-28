@@ -4,8 +4,8 @@ body{
     display: flex;
     margin: 0px;
     width: 100%;
-  color: white;
-    
+    color: white;
+    user-select: none;
 }
 .sideBar {
 
