@@ -1,32 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotfree</title>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spotfree</title>
     <link rel="stylesheet" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
     <link rel="stylesheet" href="/templates/style.css">
-    <script defer src="./index.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script defer src="    ./index.js"></script>
     <script defer src="./playAudio.js"></script>
-    
+    <script defer src="createCards.js"></script>
+  
+
+
 </head>
 
 
 <body>
+<div class="Main">
     <div class="sideBar">
-        <h1>:) Spotifree</h1>
+        <h1 id="oi">:) Spotifree</h1>
         
-        <button class="inicio"      onclick="load('Inicio')">   <i class="fas fa-home"></i> Inicio </i></button>
-        <button class="Pesquisar"       onclick="load('buscar')">   <i class="fa-solid fa-magnifying-glass"></i> Pesquisar </button>
-        <span class="conteudo"></span>
-        
-        
+        <button class="inicio"      onclick="load('Inicio'), createCard()">   <i class="fas fa-home"></i> Inicio </i></button>
+        <button class="Pesquisar"   onclick="load('buscar')">   <i class="fa-solid fa-magnifying-glass"></i> Pesquisar </button>
     </div>
-    <main class="Main">
-    </main>
     
+    <div class="theMusicSide"></div>
+
+</div>
+
+
+<div class="player">
+
+    <progress id="progress" value="0" max="1" style="width:400px;"></progress>
+    <div class="playerCenter">
+        <div id="previous"><i class="fa-solid fa-backward-step"></i></div> 
+        
+        <div id="play", onclick="PlayPause()"><i class="fa-solid fa-play"></i></div>
+        
+        <div id="next"><i class="fa-solid fa-forward-step"></i></div> 
+    </div>
+
     
+    <div class="playerRight">
+
+        <input type="range" name="volume" id="volume" min="0" max="1" onchange="volumeValue()" step="0.01" >
+        <label for="volume"></label>
+    </div>
+</div>
+
+
+
+  
+
+
+    
+
+
 </body>
 </html>

@@ -1,44 +1,36 @@
-.Main{
-    
-    align-items: top;
-    flex-direction: column;
-    overflow-y: auto;
-    
-}
-.Main::-webkit-scrollbar{
-    width: 1vh;
-}
-
-.Main::-webkit-scrollbar-thumb{
-    background-color: #353535;
-    animation-name: fade;
-    animation-duration: 1s;
 
 
-}
-@keyframes fade {
-    from {
-        background-color: #353535;
-    }
-    to {
-        background-color: transparent;
-    }
-}
 
-.Main .container {
-    height: 200px;
-    width: 102.5vh;
-    margin: 10px;
+
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 50%;
+    width: 90%;
+    padding: 0;
     margin-left: 40px;
-    background-color: rgb(34, 34, 34);
+    background-color: transparent;
 }
-.Main .box{
+.box{
     border-radius: 10px;
     margin: 10px;
     margin-left: 50px;
-    width: 100vh;
+    width: 90.5%;
     height: 100px;
     background-color: rgb(34, 34, 34);
     display: flex;
   
+}
+.card{
+    
+    display: flex;
+    background-color: rgb(34, 34, 34);
+    width: 45%;
+    height: 30%;
+    margin: 4%;
+    margin-left: 1%;
+    border-radius: 10px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
