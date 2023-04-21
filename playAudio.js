@@ -3,49 +3,116 @@ const info = [
     {"id":2,"imageUrl":"img/We'll meet again.jpg","path":"musicas/We'll Meet Again.mp3", "title":"We'll Meet Again"},
     {"id":3,"imageUrl":"img/Sangue.png","path":"musicas/Sangue.mp3", "title":"Sangue"},
     {"id":4,"imageUrl":"img/PepePls.jpg","path":"musicas/PepePls.mp3", "title":"PepePls"}
-    ]
+  ]
 
-    var lastOnes = [1, 2, 3, 4]
-    function setlast(id){
-        console.log(id)
-        
-    }
-
-    
-    const playBTN =  document.getElementById('play')
-    const audioEl = new Audio
+  const buttonPlay = document.querySelector('#play')
+  const audioEl = new Audio
+  var VolumeBeforeMuted 
+  var currentMusic
+  var Volume
     
     $('#player').on('timeupdate', function() {
-        $('#progress').attr("value", this.currentTime / this.duration);
+      $('#progress').attr("value", this.currentTime / this.duration);
     });
 
-function volumeValue(){
-    const Volume = document.getElementById('volume')
-    return Volume.value
+
+
+function updateVolumeValue(){
+    Volume = document.getElementById('volume').value
+    audioEl.volume = Volume
+    VolumeBeforeMuted = Volume
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById('volume').addEventListener("input", updateVolumeValue())
+})
+
+
 
 function PlayPause() {
     if (audioEl.paused) {
-      audioEl.volume = volumeValue()
+
       audioEl.play()
+      buttonPlay.innerHTML = '<i class="fa-solid fa-circle-pause fa-xl" style="color: #ffffff;"></i>'
+      SetCurrentTime()
+
     } else {
       audioEl.pause()
+      buttonPlay.innerHTML = '<i class="fa-solid fa-circle-play fa-xl"></i>'
+
     }
   }
   
+
+
   function setSong(position) {
    
-    const setAudiopath = lastOnes[position]
-    var songId = info[position].id
+    currentMusic = position
+    const setAudiopath = info[position].path
     audioEl.src = setAudiopath
     audioEl.play()
-    setlast(songId)
-    console.log (setAudiopath)
+    buttonPlay.innerHTML = '<i class="fa-solid fa-circle-pause fa-xl" style="color: #ffffff;"></i>'
+    SetCurrentTime()
+
+
 
   }
+  function SetCurrentTime() {
+    const audio = audioEl.buffered
+    
+    if (audioEl.paused || audioEl.ended) {
+      return 'paused'
+    }
+    if (audio.length) {
+      const BarPercentage = 100 * audioEl.currentTime / audioEl.duration
+      console.log(BarPercentage)
+      SetProgressBarSize(BarPercentage)
+    }
   
-  
+    setTimeout(SetCurrentTime, 500)
+  }
 
 
 
+function SetProgressBarSize(Percentage) { 
+    const progressed = document.getElementById('progressed')
+    progressed.style.width = `${Percentage}%`
+}
 
+
+
+function next() {
+  var nextMusic = currentMusic + 1
+  setSong(nextMusic)
+}
+audioEl.addEventListener("ended", next)
+document.getElementById("next").addEventListener("click", next)
+
+function previous() {
+  var previousMusic = currentMusic - 1
+  setSong(previousMusic)
+}
+document.getElementById("previous").addEventListener("click", previous)
+
+
+
+function momento(percentage) {
+  const percentageInSecs = percentage * audioEl.duration / 100
+  audioEl.currentTime = percentageInSecs
+}
+function Mute() {
+  //trocar entre mutado e nao mutado
+  //mutado, coloca  o audio como zero, e muda o icone pra mutado
+  //chama a função updatevolume 
+  let MuteBTN = document.querySelector("#muteBTN")
+
+  if (Volume > 0) {
+    Volume = 0
+    MuteBTN.innerHTML = '<i class="fa-solid fa-volume-xmark fa-lg"></i>'
+  }
+  else if (Volume == 0) {
+  Volume = VolumeBeforeMuted
+  MuteBTN.innerHTML = '<i class="fa-solid fa-volume-high fa-lg"></i>'
+  } 
+  audioEl.volume = Volume
+}
