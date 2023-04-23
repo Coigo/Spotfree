@@ -40,6 +40,7 @@ function PlayPause() {
       audioEl.pause()
       buttonPlay.innerHTML = '<i class="fa-solid fa-circle-play fa-xl"></i>'
 
+
     }
   }
   
@@ -57,19 +58,31 @@ function PlayPause() {
 
 
   }
+
+
+
+
+
+  let timeoutId;
+
   function SetCurrentTime() {
-    const audio = audioEl.buffered
-    
-    if (audioEl.paused || audioEl.ended) {
-      return 'paused'
+    const audio = audioEl.buffered;
+  
+    if (audioEl.paused) {
+      return;
     }
+  
     if (audio.length) {
       const BarPercentage = 100 * audioEl.currentTime / audioEl.duration
       console.log(BarPercentage)
       SetProgressBarSize(BarPercentage)
     }
   
-    setTimeout(SetCurrentTime, 500)
+    if (timeoutId) {
+      clearTimeout(timeoutId)
+    }
+  
+    timeoutId = setTimeout(SetCurrentTime, 500)
   }
 
 
